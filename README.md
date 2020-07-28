@@ -10,6 +10,7 @@ Flutter App to learn about the framework using clean architecture and TDD
 >  *NUMBERS API*, An API for interesting facts about numbers
 
 Example of use: (http://numbersapi.com/42?json.)[http://numbersapi.com/42?json.]
+
 __response.json__
 ```json
 {
