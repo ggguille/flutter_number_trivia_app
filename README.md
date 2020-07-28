@@ -9,6 +9,8 @@ Flutter App to learn about the framework using clean architecture and TDD
 #### Dependencies
 - [**Equatable**](https://pub.dev/packages/equatable), Simplify Equality Comparisons
     > equatable: ^1.2.3
+- [**Dartz**](https://pub.dev/packages/dartz), Functional programming in Dart
+    > dartz: ^0.9.1
 
 ##### Numbers API [Link](http://numbersapi.com/#42)
 >  *NUMBERS API*, An API for interesting facts about numbers
