@@ -6,10 +6,8 @@ Flutter App to learn about the framework using clean architecture and TDD
 
 [Course Link](https://resocoder.com/category/tutorials/flutter/tdd-clean-architecture/)
 
-##### Numbers API
-[Link](http://numbersapi.com/#42)
->  *NUMBERS API*
->  An API for interesting facts about numbers
+##### Numbers API [Link](http://numbersapi.com/#42)
+>  *NUMBERS API*, An API for interesting facts about numbers
 
 Example of use: (http://numbersapi.com/42?json.)[http://numbersapi.com/42?json.]
 __response.json__
