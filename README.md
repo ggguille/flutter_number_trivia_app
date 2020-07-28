@@ -12,6 +12,11 @@ Flutter App to learn about the framework using clean architecture and TDD
 - [**Dartz**](https://pub.dev/packages/dartz), Functional programming in Dart
     > dartz: ^0.9.1
 
+#### Dev Dependencies
+- [**Mockito**](https://pub.dev/packages/mockito), Mock library for Dart inspired by Mockito.
+    > mockito: ^4.1.1
+
+
 ##### Numbers API [Link](http://numbersapi.com/#42)
 >  *NUMBERS API*, An API for interesting facts about numbers
 
