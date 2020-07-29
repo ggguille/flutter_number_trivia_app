@@ -30,5 +30,34 @@ void main() {
           expect(result, expected);
         }
     );
+
+    test(
+        'should return a valid model when the JSON number is regarded as a double',
+            () async {
+          final Map<String, dynamic> jsonMap =
+          json.decode(fixture('trivia_double.json'));
+
+          final result = NumberTriviaModel.fromJson(jsonMap);
+          final expected = NumberTriviaModel(
+              number: (4e+185).toInt(),
+              text: "4e+185 is the number of planck volumes in the observable universe."
+          );
+          expect(result, expected);
+        }
+    );
+  });
+  
+  group('toJson', () {
+    test(
+        'should return a JSON map containing the proper data',
+        () async {
+          final result = NumberTriviaModel(number: 1, text: 'test').toJson();
+          final expected = {
+            "number": 1,
+            "text": 'test'
+          };
+          expect(result, expected);
+        }
+    );
   });
 }
