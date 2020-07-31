@@ -34,18 +34,6 @@ void main() {
     );
   });
 
-  group('getConcreteNumberTrivia', () {
-    final tNumber = 1;
-    test(
-        'should check if the device is online',
-        () async {
-          when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-          repository.getConcreteNumberTrivia(tNumber);
-          verify(mockNetworkInfo.isConnected);
-        }
-    );
-  });
-
   group('device is online', () {
     final tNumber = 1;
     final tNumberTriviaModel = NumberTriviaModel(
@@ -96,6 +84,47 @@ void main() {
         verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
         verifyZeroInteractions(mockLocalDataSource);
         expect(result, equals(Left(ServerFailure())));
+      },
+    );
+  });
+
+  group('device is offline', () {
+    final tNumber = 1;
+    final tNumberTriviaModel = NumberTriviaModel(
+        number: tNumber,
+        text: 'test trivia'
+    );
+    final NumberTrivia tNumberTrivia = tNumberTriviaModel;
+
+    setUp(() {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+    });
+
+    test(
+      'should return last locally cached data when the cached data is present',
+      () async {
+        when(mockLocalDataSource.getLastNumberTrivia())
+            .thenAnswer((_) async => tNumberTriviaModel);
+
+        final result = await repository.getConcreteNumberTrivia(tNumber);
+
+        verifyZeroInteractions(mockRemoteDataSource);
+        verify(mockLocalDataSource.getLastNumberTrivia());
+        expect(result, equals(Right(tNumberTrivia)));
+      },
+    );
+
+    test(
+      'should return CacheFailure when there is no cached data present',
+          () async {
+        when(mockLocalDataSource.getLastNumberTrivia())
+            .thenThrow(CacheException());
+
+        final result = await repository.getConcreteNumberTrivia(tNumber);
+
+        verifyZeroInteractions(mockRemoteDataSource);
+        verify(mockLocalDataSource.getLastNumberTrivia());
+        expect(result, equals(Left(CacheFailure())));
       },
     );
   });
