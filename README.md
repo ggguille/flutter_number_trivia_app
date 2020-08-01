@@ -11,6 +11,8 @@ Flutter App to learn about the framework using clean architecture and TDD
     > equatable: ^1.2.3
 - [**Dartz**](https://pub.dev/packages/dartz), Functional programming in Dart
     > dartz: ^0.9.1
+- [**Data Connection Checker**](https://pub.dev/packages/data_connection_checker), A pure Dart utility library that checks for an internet connection
+    > data_connection_checker: ^0.3.4
 
 #### Dev Dependencies
 - [**Mockito**](https://pub.dev/packages/mockito), Mock library for Dart inspired by Mockito.
