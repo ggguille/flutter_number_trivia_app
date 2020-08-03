@@ -15,6 +15,10 @@ Flutter App to learn about the framework using clean architecture and TDD
     > data_connection_checker: ^0.3.4
 - [**Shared preferences plugin**](https://pub.dev/packages/shared_preferences), Wraps platform-specific persistent storage for simple data (NSUserDefaults on iOS and macOS, SharedPreferences on Android, etc.).
     > shared_preferences: ^0.5.8
+- [**Connectivity**](https://pub.dev/packages/connectivity), This plugin allows Flutter apps to discover network connectivity and configure themselves accordingly. It can distinguish between cellular vs WiFi connection.
+    > connectivity: ^0.4.9
+- [**HTTP**](https://pub.dev/packages/http), A composable, Future-based library for making HTTP requests.
+    > http: ^0.12.2
 
 #### Dev Dependencies
 - [**Mockito**](https://pub.dev/packages/mockito), Mock library for Dart inspired by Mockito.
