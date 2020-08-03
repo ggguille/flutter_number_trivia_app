@@ -41,6 +41,10 @@ dependencies:
   # Local cache
   shared_preferences: ^0.5.8
 
+  # Remote API
+  connectivity: ^0.4.9
+  http: ^0.12.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
