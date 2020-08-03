@@ -13,6 +13,8 @@ Flutter App to learn about the framework using clean architecture and TDD
     > dartz: ^0.9.1
 - [**Data Connection Checker**](https://pub.dev/packages/data_connection_checker), A pure Dart utility library that checks for an internet connection
     > data_connection_checker: ^0.3.4
+- [**Shared preferences plugin**](https://pub.dev/packages/shared_preferences), Wraps platform-specific persistent storage for simple data (NSUserDefaults on iOS and macOS, SharedPreferences on Android, etc.).
+    > shared_preferences: ^0.5.8
 
 #### Dev Dependencies
 - [**Mockito**](https://pub.dev/packages/mockito), Mock library for Dart inspired by Mockito.
