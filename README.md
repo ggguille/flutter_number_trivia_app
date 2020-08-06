@@ -19,6 +19,8 @@ Flutter App to learn about the framework using clean architecture and TDD
     > connectivity: ^0.4.9
 - [**HTTP**](https://pub.dev/packages/http), A composable, Future-based library for making HTTP requests.
     > http: ^0.12.2
+- [**BLoC**](https://pub.dev/packages/flutter_bloc), Widgets that make it easy to integrate blocs and cubits into Flutter
+    > flutter_bloc: ^6.0.1
 
 #### Dev Dependencies
 - [**Mockito**](https://pub.dev/packages/mockito), Mock library for Dart inspired by Mockito.
