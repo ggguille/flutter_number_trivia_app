@@ -1,4 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_number_trivia_app/core/error/failure.dart';
+import 'package:flutter_number_trivia_app/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_number_trivia_app/core/util/input_converter.dart';
@@ -49,20 +51,23 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
               final failureOrTrivia = await getConcreteNumberTrivia(
                   Params(number: integer)
               );
-              yield failureOrTrivia.fold(
-                      (failure) => Error(message: _mapFailureToMessage(failure)),
-                      (trivia) => Loaded(trivia: trivia)
-              );
+              yield* _eitherLoadedOrErrorState(failureOrTrivia);
             },
       );
     } else if (event is GetTriviaForRandomNumber) {
       yield Loading();
       final failureOrTrivia = await getRandomNumberTrivia();
-      yield failureOrTrivia.fold(
-            (failure) => Error(message: _mapFailureToMessage(failure)),
-            (trivia) => Loaded(trivia: trivia),
-      );
+      yield* _eitherLoadedOrErrorState(failureOrTrivia);
     }
+  }
+
+  Stream<NumberTriviaState> _eitherLoadedOrErrorState(
+      Either<Failure, NumberTrivia> either
+  ) async* {
+    yield either.fold(
+            (failure) => Error(message: _mapFailureToMessage(failure)),
+            (trivia) => Loaded(trivia: trivia)
+    );
   }
 
   String _mapFailureToMessage(Failure failure) {
