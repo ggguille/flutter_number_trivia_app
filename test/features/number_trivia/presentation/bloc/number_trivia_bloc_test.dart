@@ -122,7 +122,66 @@ void main() {
         Error(message: CACHE_FAILURE_MESSAGE),
       ],
     );
+  });
 
+  group('GetTriviaForRandomNumber', () {
+    final tNumberTrivia = NumberTrivia(number: 1, text: 'test trivia');
+
+    test(
+      'should get data from the random use case',
+          () async {
+        // arrange
+        when(mockGetRandomNumberTrivia())
+            .thenAnswer((_) async => Right(tNumberTrivia));
+        // act
+        bloc.add(GetTriviaForRandomNumber());
+        await untilCalled(mockGetRandomNumberTrivia());
+        // assert
+        verify(mockGetRandomNumberTrivia());
+      },
+    );
+
+    blocTest(
+      'should emit [Loading, Loaded] when data is gotten successfully',
+      build: () {
+        when(mockGetRandomNumberTrivia())
+            .thenAnswer((_) async => Right(tNumberTrivia));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(GetTriviaForRandomNumber()),
+      expect: [
+        Loading(),
+        Loaded(trivia: tNumberTrivia),
+      ],
+    );
+
+    blocTest(
+      'should emit [Loading, Error] when getting data fails',
+      build: () {
+        when(mockGetRandomNumberTrivia())
+            .thenAnswer((_) async => Left(ServerFailure()));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(GetTriviaForRandomNumber()),
+      expect: [
+        Loading(),
+        Error(message: SERVER_FAILURE_MESSAGE),
+      ],
+    );
+
+    blocTest(
+      'should emit [Loading, Error] with a proper message for the error when getting data fails',
+      build: () {
+        when(mockGetRandomNumberTrivia())
+            .thenAnswer((_) async => Left(CacheFailure()));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(GetTriviaForRandomNumber()),
+      expect: [
+        Loading(),
+        Error(message: CACHE_FAILURE_MESSAGE),
+      ],
+    );
   });
 }
 
