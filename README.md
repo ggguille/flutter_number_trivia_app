@@ -21,6 +21,8 @@ Flutter App to learn about the framework using clean architecture and TDD
     > http: ^0.12.2
 - [**BLoC**](https://pub.dev/packages/flutter_bloc), Widgets that make it easy to integrate blocs and cubits into Flutter
     > flutter_bloc: ^6.0.1
+- [**Get It**](https://pub.dev/packages/get_it), This is a simple Service Locator for Dart and Flutter projects
+    > get_it: ^4.0.4
 
 #### Dev Dependencies
 - [**Mockito**](https://pub.dev/packages/mockito), Mock library for Dart inspired by Mockito.
