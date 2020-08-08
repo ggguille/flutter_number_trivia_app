@@ -25,11 +25,18 @@ BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
             children: <Widget>[
               SizedBox(height: 10),
               // Top half
-              Container(
-                // Third of the size of the screen
-                height: MediaQuery.of(context).size.height / 3,
-                // Message Text widgets / CircularLoadingIndicator
-                child: Placeholder(),
+              BlocBuilder<NumberTriviaBloc, NumberTriviaState>(
+                builder: (context, state) {
+                  if (state is Empty) {
+                    return MessageDisplay(
+                      message: 'Start searching!',
+                    );
+                  } else if (state is Error) {
+                    return MessageDisplay(
+                      message: state.message,
+                    );
+                  }
+                }
               ),
               SizedBox(height: 20),
               // Bottom half
@@ -59,3 +66,31 @@ BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
       )
   );
 }
+
+class MessageDisplay extends StatelessWidget {
+  final String message;
+
+  MessageDisplay({
+      Key key,
+      @required this.message,
+  }) : assert(message != null),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // Third of the size of the screen
+      height: MediaQuery.of(context).size.height / 3,
+      child: Center(
+        child: SingleChildScrollView(
+          child: Text(
+            message,
+            style: TextStyle(fontSize: 25),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
