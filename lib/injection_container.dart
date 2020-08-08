@@ -11,7 +11,7 @@ import 'package:flutter_number_trivia_app/features/number_trivia/presentation/bl
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final sl = GetIt.asNewInstance();
+final sl = GetIt.instance;
 
 Future<void> init() async {
   //! Features - Number Trivia

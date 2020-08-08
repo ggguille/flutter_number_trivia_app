@@ -3,6 +3,7 @@ import 'package:flutter_number_trivia_app/features/number_trivia/presentation/pa
 import 'injection_container.dart' as di;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(MyApp());
 }
