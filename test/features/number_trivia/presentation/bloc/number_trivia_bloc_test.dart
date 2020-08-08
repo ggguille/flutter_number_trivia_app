@@ -48,29 +48,46 @@ void main() {
     // NumberTrivia instance is needed too, of course
     final tNumberTrivia = NumberTrivia(number: 1, text: 'test trivia');
 
+    void setUpMockInputConverterSuccess() =>
+        when(mockInputConverter.stringToUnsignedInteger(any))
+            .thenReturn(Right(tNumberParsed));
+
     test(
-          'should call the InputConverter to validate and convert the string to an unsigned integer',
-          () async {
-            // arrange
-            when(mockInputConverter.stringToUnsignedInteger(any))
-                .thenReturn(Right(tNumberParsed));
-            // act
-            bloc.add(GetTriviaForConcreteNumber(tNumberString));
-            await untilCalled(mockInputConverter.stringToUnsignedInteger(any));
-            // assert
-            verify(mockInputConverter.stringToUnsignedInteger(tNumberString));
-          },
+        'should call the InputConverter to validate and convert the string to an unsigned integer',
+        () async {
+          // arrange
+          setUpMockInputConverterSuccess();
+          // act
+          bloc.add(GetTriviaForConcreteNumber(tNumberString));
+          await untilCalled(mockInputConverter.stringToUnsignedInteger(any));
+          // assert
+          verify(mockInputConverter.stringToUnsignedInteger(tNumberString));
+        },
     );
 
     blocTest(
-      'should emit [Error] when the input is invalid',
-      build: () {
-        when(mockInputConverter.stringToUnsignedInteger(any))
-            .thenReturn(Left(InvalidInputFailure()));
-        return bloc;
-      },
-      act: (bloc) => bloc.add(GetTriviaForConcreteNumber(tNumberString)),
-      expect: [Error(message: INVALID_INPUT_FAILURE_MESSAGE)],
+        'should emit [Error] when the input is invalid',
+        build: () {
+          when(mockInputConverter.stringToUnsignedInteger(any))
+              .thenReturn(Left(InvalidInputFailure()));
+          return bloc;
+        },
+        act: (bloc) => bloc.add(GetTriviaForConcreteNumber(tNumberString)),
+        expect: [Error(message: INVALID_INPUT_FAILURE_MESSAGE)],
+    );
+
+    test(
+        'should get data from the concrete use case',
+        () async {
+          setUpMockInputConverterSuccess();
+          when(mockGetConcreteNumberTrivia(any))
+              .thenAnswer((_) async => Right(tNumberTrivia));
+
+          bloc.add(GetTriviaForConcreteNumber(tNumberString));
+          await untilCalled(mockGetConcreteNumberTrivia(any));
+
+          verify(mockGetConcreteNumberTrivia(Params(number: tNumberParsed)));
+        }
     );
 
   });
