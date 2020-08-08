@@ -25,6 +25,8 @@ Flutter App to learn about the framework using clean architecture and TDD
 #### Dev Dependencies
 - [**Mockito**](https://pub.dev/packages/mockito), Mock library for Dart inspired by Mockito.
     > mockito: ^4.1.1
+- [**BLoC Test**](https://pub.dev/packages/bloc_test), A Dart package that makes testing blocs and cubits easy
+    > bloc_test: ^7.0.0
 
 
 ##### Numbers API [Link](http://numbersapi.com/#42)
