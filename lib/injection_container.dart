@@ -6,7 +6,7 @@ import 'package:flutter_number_trivia_app/features/number_trivia/data/datasource
 import 'package:flutter_number_trivia_app/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart';
 import 'package:flutter_number_trivia_app/features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
 import 'package:flutter_number_trivia_app/features/number_trivia/domain/repositories/number_trivia_repository.dart';
-import 'package:flutter_number_trivia_app/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
+import 'package:flutter_number_trivia_app/features/number_trivia/presentation/bloc/bloc.dart';
 import 'package:flutter_number_trivia_app/features/number_trivia/presentation/bloc/number_trivia_event.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
