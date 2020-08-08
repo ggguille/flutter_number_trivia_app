@@ -31,6 +31,8 @@ BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
                     return MessageDisplay(
                       message: 'Start searching!',
                     );
+                  } else if (state is Loading) {
+                    return LoadingWidget();
                   } else if (state is Error) {
                     return MessageDisplay(
                       message: state.message,
@@ -89,6 +91,22 @@ class MessageDisplay extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height / 3,
+      child: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }
