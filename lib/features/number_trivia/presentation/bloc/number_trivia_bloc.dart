@@ -1,3 +1,4 @@
+import 'package:flutter_number_trivia_app/core/error/failure.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_number_trivia_app/core/util/input_converter.dart';
@@ -44,9 +45,27 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
               yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
             },
             (integer) async* {
-              getConcreteNumberTrivia(Params(number: integer));
+              yield Loading();
+              final failureOrTrivia = await getConcreteNumberTrivia(
+                  Params(number: integer)
+              );
+              yield failureOrTrivia.fold(
+                      (failure) => Error(message: _mapFailureToMessage(failure)),
+                      (trivia) => Loaded(trivia: trivia)
+              );
             },
       );
+    }
+  }
+
+  String _mapFailureToMessage(Failure failure) {
+    switch(failure.runtimeType) {
+      case ServerFailure:
+        return SERVER_FAILURE_MESSAGE;
+      case CacheFailure:
+        return CACHE_FAILURE_MESSAGE;
+      default:
+        return 'Unexpected Error';
     }
   }
 }
