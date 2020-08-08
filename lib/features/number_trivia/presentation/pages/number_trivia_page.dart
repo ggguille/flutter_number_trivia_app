@@ -11,7 +11,9 @@ class NumberTriviaPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Number Trivia'),
       ),
-      body: buildBody(context),
+      body: SingleChildScrollView(
+        child: buildBody(context),
+      ),
     );
   }
 }
@@ -48,26 +50,7 @@ BlocProvider<NumberTriviaBloc> buildBody(BuildContext context) {
               ),
               SizedBox(height: 20),
               // Bottom half
-              Column(
-                children: <Widget>[
-                  // TextField
-                  Placeholder(fallbackHeight: 40),
-                  SizedBox(height: 10),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        // Search concrete button
-                        child: Placeholder(fallbackHeight: 30),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        // Random button
-                        child: Placeholder(fallbackHeight: 30),
-                      )
-                    ],
-                  )
-                ],
-              )
+              TriviaControls()
             ],
           ),
         ),
