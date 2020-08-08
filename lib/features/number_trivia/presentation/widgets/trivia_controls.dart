@@ -9,7 +9,6 @@ class TriviaControls extends StatefulWidget {
 
 class _TriviaControlsState extends State<TriviaControls> {
   final TextEditingController _controller = TextEditingController();
-  String inputStr;
 
   @override
   void dispose() {
@@ -29,7 +28,7 @@ class _TriviaControlsState extends State<TriviaControls> {
             hintText: 'Input a number',
           ),
           onChanged: (value) {
-            inputStr = value;
+            _controller.text = value;
           },
           onSubmitted: (_) {
             _dispatchConcrete();
@@ -60,13 +59,12 @@ class _TriviaControlsState extends State<TriviaControls> {
   }
 
   void _clear() {
-    inputStr = '';
     _controller.clear();
   }
 
   void _dispatchConcrete() {
     BlocProvider.of<NumberTriviaBloc>(context)
-        .add(GetTriviaForConcreteNumber(inputStr));
+        .add(GetTriviaForConcreteNumber(_controller.text));
     _clear();
   }
 
